@@ -37,6 +37,8 @@ cd /var/www/html/
 sudo composer create-project laravel/laravel work --prefer-dist
 sudo chmod -R 777 work
 
+************* ATÉ AQUI FUNFA D'BOA :D ******************
+
 //Creating Virtual Host work.com
 sudo leafpad /etc/apache2/sites-available/work.com.conf
 
