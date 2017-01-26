@@ -1,0 +1,36 @@
+<th data-formatter="operateFormatter" data-align="center" data-events="operateEvents" data-sortable="false">Ações</th>
+
+
+
+<script>
+	
+    function operateFormatter(value, row, index) {
+        return [
+		
+            '<a class="edit ml10" href="javascript:void(0)" title="Editar">',
+                '<i class="glyphicon glyphicon-edit" style="font-size:16px;margin:2px;"></i>',
+            '</a>',
+            '<a class="remove ml10" href="javascript:void(0)" title="Excluir">',
+                '<i class="glyphicon glyphicon-remove" style="font-size:16px;margin:2px;"></i>',
+            '</a>'
+        ].join('');
+    }
+
+    window.operateEvents = {
+        
+    	'click .edit': function (e, value, row, index) {    
+    		if('${poderes.getAlterar()}'=='true'){     		
+            	window.location.href="${pageContext.request.contextPath}/inspecao/alterar/"+row.controle+"/"+row.dtmov.replaceAll(row.dtmov,'/','.');//redireciona para alteração
+    		}else{
+           		svalert('Você não tem permissão para alterar as inspeções.');	
+           	}
+        },
+        'click .remove': function (e, value, row, index) {
+        	if('${poderes.getExcluir()}'=='true'){
+            	svconfirmmodallink("Confirmação","Deseja realmente excluir essa inspeção?", "${pageContext.request.contextPath}/inspecao/excluir/"+row.controle+"/"+row.dtmov.replaceAll(row.dtmov,'/','.')+"/"+md5(row.controle+gethashkey("${pageContext.request.contextPath}")));
+        	}else{
+            	svalert('Você não tem permissão para excluir as inspeções.');
+            }
+        }
+    };
+</script> 
